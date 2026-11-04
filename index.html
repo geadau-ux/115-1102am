@@ -41,6 +41,22 @@
   .custom-word { background-color: var(--custom); color: var(--custom-ink); }
   .custom-word:hover { background-color: var(--custom-hover); box-shadow: 0 2px 4px rgba(0,0,0,.2); }
   .custom-word.active { background-color: var(--custom-on); box-shadow: 0 0 0 2px var(--custom), 0 0 0 4px var(--custom-ink); }
+  mark.hl { padding: 0.05rem 0.4rem; margin: 0 0.1rem; border-radius: 0.35rem; font-weight: 700; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+  .hl-slate { background: #e2e8f0; color: #1e293b; }
+  .hl-emerald { background: #d1fae5; color: #065f46; }
+  .hl-amber { background: #fef3c7; color: #92400e; }
+  .hl-indigo { background: #e0e7ff; color: #3730a3; }
+  .hl-sky { background: #e0f2fe; color: #075985; }
+  .part-tab { transition: transform .2s, opacity .2s, box-shadow .2s; opacity: .62; }
+  .part-tab:hover { opacity: .9; transform: translateY(-2px); }
+  .part-tab[aria-selected="true"] { opacity: 1; box-shadow: 0 0 0 4px #fff, 0 0 0 7px #a5b4fc; }
+  .part-tab:focus-visible, .step-tab:focus-visible { outline: 3px solid #1e293b; outline-offset: 3px; }
+  .step-tab { display: flex; align-items: center; gap: .5rem; padding: .6rem .75rem; border-radius: .75rem; border: 1.5px solid #c7d2fe; background: #fff; color: #3730a3; font-weight: 700; font-size: .92rem; text-align: left; transition: background .15s, color .15s, border-color .15s; }
+  .step-tab:hover { border-color: #6366f1; background: #eef2ff; }
+  .step-tab[aria-selected="true"] { background: #4f46e5; border-color: #4f46e5; color: #fff; }
+  .step-no { flex: none; width: 1.6rem; height: 1.6rem; border-radius: 999px; display: grid; place-items: center; background: #e0e7ff; color: #3730a3; font-size: .85rem; font-variant-numeric: tabular-nums; }
+  .step-tab[aria-selected="true"] .step-no { background: #fff; color: #4f46e5; }
+  .step-panel { animation: fadeIn .3s ease; }
   .legend-chip { padding: 0.125rem 0.5rem; border-radius: 0.25rem; font-weight: 600; }
 
   [hidden], #lightbox[hidden] { display: none !important; }
@@ -93,14 +109,48 @@
             </a>
           </div>
         </div>
-        <p class="text-lg leading-relaxed text-slate-700">
-          「數位手寫與文字探索畫布 3.5」由 <strong>Code.gs（後端）</strong>與 <strong>Index.html（前端）</strong>組成。學生可以在畫布上手寫、打字、貼上照片並畫圈註記，送出後合成一張圖；老師在 Google 試算表的「🤖 AI 批改」選單中，就能讓 Gemini 依題目與詳解產生評量規準，再逐份辨識作答圖並填回分數與回饋。批改完成後，學生切到「🔍 查詢成績與詳解」，輸入班級、座號、姓名就能看到自己的分數、AI 回饋與詳解。<br><br>
-          這份 Prompt 一次就要 AI 寫出完整系統，所以每個關鍵字都有它的作用。<strong class="text-indigo-600">黃色的字是觸發技術功能的關鍵，建議保留；綠色的字可以依您的科目和需求改寫。</strong>
-        </p>
+        <p class="text-lg leading-relaxed text-slate-700">「數位手寫與文字探索畫布 3.5」由 <mark class="hl hl-slate">Code.gs（後端）</mark>與 <mark class="hl hl-slate">Index.html（前端）</mark>組成。整個流程分成三段：</p>
+
+        <ol class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
+          <li class="min-w-0 rounded-xl bg-emerald-50 border border-emerald-200 p-4">
+            <p class="flex items-center gap-2 font-bold text-emerald-800 text-lg"><span class="w-7 h-7 rounded-full bg-emerald-600 text-white grid place-items-center text-sm">1</span>✏️ 學生作答</p>
+            <p class="mt-2 text-slate-700 leading-relaxed">學生可以在畫布上<strong class="text-emerald-800">手寫、打字、貼上照片並畫圈註記</strong>，送出後<strong class="text-emerald-800">合成一張圖</strong>。</p>
+          </li>
+          <li class="min-w-0 rounded-xl bg-indigo-50 border border-indigo-200 p-4">
+            <p class="flex items-center gap-2 font-bold text-indigo-800 text-lg"><span class="w-7 h-7 rounded-full bg-indigo-600 text-white grid place-items-center text-sm">2</span>🤖 AI 批改</p>
+            <p class="mt-2 text-slate-700 leading-relaxed">老師在 Google 試算表的<mark class="hl hl-amber">「🤖 AI 批改」選單</mark>中，就能讓 Gemini 依題目與詳解<strong class="text-indigo-800">產生評量規準</strong>，再<strong class="text-indigo-800">逐份辨識作答圖並填回分數與回饋</strong>。</p>
+          </li>
+          <li class="min-w-0 rounded-xl bg-sky-50 border border-sky-200 p-4">
+            <p class="flex items-center gap-2 font-bold text-sky-800 text-lg"><span class="w-7 h-7 rounded-full bg-sky-600 text-white grid place-items-center text-sm">3</span>🔍 學生查詢</p>
+            <p class="mt-2 text-slate-700 leading-relaxed">批改完成後，學生切到「🔍 查詢成績與詳解」，輸入<strong class="text-sky-800">班級、座號、姓名</strong>就能看到<strong class="text-sky-800">自己的分數、AI 回饋與詳解</strong>。</p>
+          </li>
+        </ol>
+
+        <div class="mt-5 rounded-xl bg-slate-50 border border-slate-200 p-4 md:p-5">
+          <p class="text-slate-800 leading-relaxed">💡 這份 Prompt 一次就要 AI 寫出完整系統，所以<strong class="text-slate-900">每個關鍵字都有它的作用</strong>：</p>
+          <ul class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <li class="flex items-center gap-3"><span class="legend-chip tech-word text-sm shrink-0">黃色的字</span><span class="text-slate-700">是觸發技術功能的關鍵，<strong class="text-slate-900">建議保留</strong></span></li>
+            <li class="flex items-center gap-3"><span class="legend-chip custom-word text-sm shrink-0">綠色的字</span><span class="text-slate-700">可以依您的科目和需求<strong class="text-slate-900">改寫</strong></span></li>
+          </ul>
+        </div>
+
+        <p class="mt-5 text-slate-700 leading-relaxed">下方分成兩個分頁：<strong class="text-slate-900">📝 第一部分</strong>拆解 Prompt 裡每個關鍵字的作用，<strong class="text-slate-900">🚀 第二部分</strong>帶你一步步完成部署。</p>
       </div>
 
+      <!-- 主分頁 -->
+      <nav class="grid grid-cols-1 sm:grid-cols-2 gap-4" role="tablist" aria-label="教學內容">
+        <button type="button" role="tab" id="ptab-1" data-part="1" aria-controls="part1" class="part-tab bg-slate-800 hover:bg-slate-700 text-white rounded-xl shadow-md py-4 px-6 flex items-center justify-center gap-3 text-left">
+          <span class="text-2xl">📝</span>
+          <span><span class="block text-lg font-bold">第一部分：Prompt 分析</span><span class="block text-sm text-slate-300">點螢光筆字詞，看懂每個關鍵字</span></span>
+        </button>
+        <button type="button" role="tab" id="ptab-2" data-part="2" aria-controls="part2" class="part-tab bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl shadow-md py-4 px-6 flex items-center justify-center gap-3 text-left">
+          <span class="text-2xl">🚀</span>
+          <span><span class="block text-lg font-bold">第二部分：部署指南</span><span class="block text-sm text-indigo-100">六個步驟，從貼程式碼到課堂批改</span></span>
+        </button>
+      </nav>
+
       <!-- 第一部分：Prompt 分析 -->
-      <section class="bg-white rounded-2xl shadow-sm overflow-hidden" aria-labelledby="part1-title">
+      <section id="part1" role="tabpanel" aria-labelledby="ptab-1" class="bg-white rounded-2xl shadow-sm overflow-hidden scroll-mt-4">
         <div class="bg-slate-800 px-6 py-4 flex flex-wrap gap-3 justify-between items-center">
           <h2 id="part1-title" class="text-xl font-bold text-white flex items-center gap-2">
             <span>📝</span> 第一部分：Prompt 分析
@@ -111,16 +161,22 @@
         </div>
 
         <div class="p-6 md:p-8 bg-slate-50 space-y-6">
-          <p class="text-slate-600">點擊 Prompt 裡的<strong class="text-slate-800">螢光筆標記字詞</strong>，右側（手機在下方）的解析面板會說明這段指令背後的運作邏輯，或提供其他科目的改寫靈感。</p>
+          <p class="text-slate-700 leading-relaxed">👆 點擊 Prompt 裡的<strong class="text-slate-900">螢光筆字詞</strong>，解析面板就會說明它的作用，或提供其他科目的改寫靈感。<span class="text-slate-500 text-sm">（電腦在右側，手機在下方）</span></p>
 
-          <div class="flex flex-wrap gap-x-6 gap-y-3 p-3 bg-white rounded-xl border border-slate-200">
-            <div class="flex items-center gap-2">
-              <span class="legend-chip tech-word text-sm">🟨 黃色螢光筆</span>
-              <span class="text-sm font-medium text-slate-700">核心技術關鍵字（建議保留，觸發系統特定功能）</span>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="flex items-start gap-3 p-4 bg-white rounded-xl border border-yellow-200">
+              <span class="legend-chip tech-word text-sm shrink-0">黃色</span>
+              <div class="min-w-0">
+                <p class="font-bold text-slate-800">核心技術關鍵字｜建議保留</p>
+                <p class="text-sm text-slate-600 mt-0.5">用來觸發系統的特定功能，刪掉或改寫可能讓功能失效。</p>
+              </div>
             </div>
-            <div class="flex items-center gap-2">
-              <span class="legend-chip custom-word text-sm">🟩 綠色螢光筆</span>
-              <span class="text-sm font-medium text-slate-700">可客製化關鍵字（依科目與需求自由修改）</span>
+            <div class="flex items-start gap-3 p-4 bg-white rounded-xl border border-green-200">
+              <span class="legend-chip custom-word text-sm shrink-0">綠色</span>
+              <div class="min-w-0">
+                <p class="font-bold text-slate-800">可客製化關鍵字｜自由修改</p>
+                <p class="text-sm text-slate-600 mt-0.5">可依科目與教學需求改寫，打造屬於自己的版本。</p>
+              </div>
             </div>
           </div>
 
@@ -342,14 +398,24 @@
       </section>
 
       <!-- 第二部分：部署指南 -->
-      <section class="bg-white rounded-2xl shadow-sm overflow-hidden" aria-labelledby="part2-title">
+      <section id="part2" role="tabpanel" aria-labelledby="ptab-2" hidden class="bg-white rounded-2xl shadow-sm overflow-hidden scroll-mt-4">
         <div class="bg-indigo-600 px-6 py-4">
           <h2 id="part2-title" class="text-xl font-bold text-white flex items-center gap-2"><span>🚀</span> 第二部分：部署指南（以數位手寫畫布 3.5 為例）</h2>
         </div>
 
         <div class="p-6 md:p-8 space-y-8">
-          <p class="text-slate-700">這套系統要準備<strong>試算表、雲端資料夾和 Gemini API 金鑰</strong>三樣東西。貼好程式碼後，用試算表上方的「🤖 AI 批改」選單一鍵建好所有分頁，再發布成網頁給學生作答。</p>
+          <p class="text-slate-700 leading-relaxed">先準備好<strong>試算表、雲端資料夾和 Gemini API 金鑰</strong>三樣東西，再依下方分頁從 ① 做到 ⑥。每一步做完，按最下方的「下一步」繼續。</p>
 
+          <div id="step-nav" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 scroll-mt-4" role="tablist" aria-label="部署步驟">
+            <button type="button" role="tab" class="step-tab" data-step="1"><span class="step-no">1</span>設定 ID 與金鑰</button>
+            <button type="button" role="tab" class="step-tab" data-step="2"><span class="step-no">2</span>貼上 Code.gs</button>
+            <button type="button" role="tab" class="step-tab" data-step="3"><span class="step-no">3</span>建立 Index.html</button>
+            <button type="button" role="tab" class="step-tab" data-step="4"><span class="step-no">4</span>初始化工作表</button>
+            <button type="button" role="tab" class="step-tab" data-step="5"><span class="step-no">5</span>發布部署</button>
+            <button type="button" role="tab" class="step-tab" data-step="6"><span class="step-no">6</span>課堂批改流程</button>
+          </div>
+
+          <div class="step-panel" role="tabpanel" data-step="1">
           <!-- 步驟一 -->
           <div class="border-l-4 border-amber-400 pl-4">
             <h3 class="text-lg font-bold text-slate-800 mb-2">步驟一：取得 ID 與設定環境變數保險箱</h3>
@@ -384,6 +450,8 @@
             </ul>
           </div>
 
+          </div>
+          <div class="step-panel" role="tabpanel" data-step="2" hidden>
           <!-- 步驟二 -->
           <div>
             <h3 class="text-lg font-bold text-slate-800 mb-2">步驟二：貼上後端大腦程式碼</h3>
@@ -1447,6 +1515,8 @@ function cleanText_(v, max) {
             </div>
           </div>
 
+          </div>
+          <div class="step-panel" role="tabpanel" data-step="3" hidden>
           <!-- 步驟三 -->
           <div>
             <h3 class="text-lg font-bold text-slate-800 mb-2">步驟三：建立前端互動網頁</h3>
@@ -2729,6 +2799,8 @@ function cleanText_(v, max) {
             <p class="text-sm text-slate-500 mt-3">💡 想先看學生端長什麼樣子？可以開啟 <a href="https://script.google.com/a/macros/go.edu.tw/s/AKfycbxKQIxwpEC5DkfQng_lDTvWNJF911kZZDWe9pwNfzPL7VT9v_UB_D6cmZu2PXlpgSBU/exec" target="_blank" rel="noopener noreferrer" class="text-indigo-600 underline underline-offset-2 hover:text-indigo-800">✨ 實際部署的示例</a>，或直接在這裡開啟不用登入的 <button type="button" id="open-demo" class="text-indigo-600 underline underline-offset-2 hover:text-indigo-800 font-medium">🧪 學生畫布預覽</button>（預覽模擬模式，內建三題示範題庫）。</p>
           </div>
 
+          </div>
+          <div class="step-panel" role="tabpanel" data-step="4" hidden>
           <!-- 步驟四 -->
           <div class="border-l-4 border-emerald-400 pl-4">
             <h3 class="text-lg font-bold text-slate-800 mb-2">步驟四：用選單初始化工作表</h3>
@@ -2761,6 +2833,8 @@ function cleanText_(v, max) {
             </ul>
           </div>
 
+          </div>
+          <div class="step-panel" role="tabpanel" data-step="5" hidden>
           <!-- 步驟五 -->
           <div class="border-l-4 border-indigo-400 pl-4 bg-indigo-50/50 p-4 rounded-r-xl">
             <h3 class="text-lg font-bold text-slate-800 mb-2">步驟五：發布部署</h3>
@@ -2778,6 +2852,8 @@ function cleanText_(v, max) {
             </ul>
           </div>
 
+          </div>
+          <div class="step-panel" role="tabpanel" data-step="6" hidden>
           <!-- 步驟六 -->
           <div class="border-l-4 border-rose-400 pl-4">
             <h3 class="text-lg font-bold text-slate-800 mb-2">步驟六：課堂上的 AI 批改流程</h3>
@@ -2797,6 +2873,7 @@ function cleanText_(v, max) {
             </ol>
             <p class="text-sm text-slate-600 mt-3">⚠️ 已經部署過舊版的老師：換上新程式碼後，請到「部署」➔「管理部署作業」➔ ✏️ 編輯 ➔ 版本選「新版本」再部署，網址不變；接著執行一次「🧱 初始化／修復工作表結構」，系統設定才會出現兩個新開關。</p>
             <p class="text-sm text-rose-600 mt-3">💡 想讓學生一送出就自動批改，可在「⚙️系統設定」勾選「送出後自動批改」；需要中途喊停時，點「⏹️ 停止自動接續批改」。</p>
+          </div>
           </div>
 
         </div>
@@ -2988,6 +3065,91 @@ function cleanText_(v, max) {
   });
   lb.addEventListener('click', function (e) { if (e.target !== lbImg) closeLb(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !lb.hidden) closeLb(); });
+
+  // 主分頁與部署步驟子分頁
+  (function () {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var partTabs = Array.prototype.slice.call(document.querySelectorAll('.part-tab'));
+    var stepTabs = Array.prototype.slice.call(document.querySelectorAll('.step-tab'));
+    var panels = Array.prototype.slice.call(document.querySelectorAll('.step-panel'));
+    var labels = stepTabs.map(function (t) { return t.textContent.replace(/^\d/, '').trim(); });
+    var nav = document.getElementById('step-nav');
+
+    function showPart(n, scroll) {
+      partTabs.forEach(function (t) {
+        var on = t.dataset.part === String(n);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById('part' + t.dataset.part).hidden = !on;
+      });
+      if (scroll) document.getElementById('part' + n).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    }
+    function showStep(n, scroll) {
+      stepTabs.forEach(function (t) {
+        var on = t.dataset.step === String(n);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+      });
+      panels.forEach(function (p) { p.hidden = p.dataset.step !== String(n); });
+      if (scroll && nav.getBoundingClientRect().top < 0) nav.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    }
+    function setHash(h) { try { history.replaceState(null, '', '#' + h); } catch (e) {} }
+
+    partTabs.forEach(function (t) {
+      t.addEventListener('click', function () { showPart(t.dataset.part, false); setHash(t.dataset.part === '1' ? 'prompt' : 'deploy'); });
+    });
+    stepTabs.forEach(function (t) {
+      t.addEventListener('click', function () { showStep(t.dataset.step, true); setHash('step' + t.dataset.step); });
+    });
+    // 鍵盤左右鍵切換
+    [partTabs, stepTabs].forEach(function (group) {
+      group.forEach(function (t, i) {
+        t.addEventListener('keydown', function (e) {
+          var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+          if (!d) return;
+          e.preventDefault();
+          var next = group[(i + d + group.length) % group.length];
+          next.focus(); next.click();
+        });
+      });
+    });
+
+    // 每個步驟底部加上「上一步／下一步」
+    panels.forEach(function (p, i) {
+      var bar = document.createElement('div');
+      bar.className = 'mt-8 pt-5 border-t border-slate-200 flex flex-wrap justify-between gap-3';
+      var mk = function (txt, step, primary) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = primary
+          ? 'ml-auto bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-5 rounded-xl shadow-sm transition'
+          : 'bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-bold py-2.5 px-5 rounded-xl transition';
+        b.textContent = txt;
+        b.addEventListener('click', function () { showStep(step, true); setHash('step' + step); });
+        return b;
+      };
+      if (i > 0) bar.appendChild(mk('← 上一步：' + labels[i - 1], i, false));
+      if (i < panels.length - 1) bar.appendChild(mk('下一步：' + labels[i + 1] + ' →', i + 2, true));
+      else {
+        var done = document.createElement('p');
+        done.className = 'ml-auto self-center font-bold text-indigo-700';
+        done.textContent = '🎉 六個步驟完成，可以開始上課囉！';
+        bar.appendChild(done);
+      }
+      p.appendChild(bar);
+    });
+
+    // 依網址 #prompt、#deploy、#step1～#step6 開啟對應分頁
+    function fromHash() {
+      var h = (location.hash || '').slice(1);
+      var m = h.match(/^step([1-6])$/);
+      if (m) { showPart(2); showStep(m[1]); }
+      else if (h === 'deploy') { showPart(2); showStep(1); }
+      else { showPart(1); showStep(1); }
+    }
+    window.addEventListener('hashchange', fromHash);
+    fromHash();
+  })();
 
   // 看複製做法：展開／收合步驟說明
   (function () {
